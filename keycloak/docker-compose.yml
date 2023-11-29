@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  postgres:
+    build: ./postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    #ports:
+    #  - "45432:5432"
+    volumes:
+      - ./postgres/pgdata:/var/lib/postgresql/data
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:20.0.2
+    environment:
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: 8180
+      KC_HOSTNAME_STRICT_BACKCHANNEL: "true"
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_USERNAME: postgres
+      KC_DB_PASSWORD: postgres
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HEALTH_ENABLED: "true"
+      KC_LOG_LEVEL: info
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8180/health/ready" ]
+      interval: 15s
+      timeout: 2s
+      retries: 15
+    command:
+      [ "start-dev", "--http-port 8180", "--import-realm" ]
+    volumes:
+      - ../keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json
+    ports:
+      - 8180:8180
+    depends_on:
+      - postgres
