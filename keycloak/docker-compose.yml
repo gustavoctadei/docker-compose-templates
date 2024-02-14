@@ -10,6 +10,7 @@ services:
     #  - "45432:5432"
     volumes:
       - ./postgres/pgdata:/var/lib/postgresql/data
+      - ./postgres/create_database_keycloak.sql:/docker-entrypoint-initdb.d/create_database_keycloak.sql
 
   keycloak:
     image: quay.io/keycloak/keycloak:20.0.2
