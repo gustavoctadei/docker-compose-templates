@@ -3,6 +3,7 @@ version: '3'
 services:
   postgres1:
     build: ./postgres1
+    container_name: postgres1
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -13,6 +14,7 @@ services:
 
   postgres2:
     build: ./postgres2
+    container_name: posgres2
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres

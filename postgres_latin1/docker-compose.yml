@@ -3,6 +3,7 @@ version: '3'
 services:
   postgres_latin1:
     build: .
+    container_name: postgres_latin1
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
