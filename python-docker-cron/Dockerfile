@@ -9,7 +9,7 @@ COPY src /app/src
 
 #Instalando as dependências
 RUN apt update
-RUN apt install -y cron libaio1
+RUN apt install -y cron
 RUN pip install --upgrade pip
 RUN pip install -r /app/src/requirements.txt
 RUN sh /app/scripts/libs.sh
