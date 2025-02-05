@@ -1,0 +1,11 @@
+services:
+  solr:
+    image: solr:9.8.0
+    container_name: solr
+    ports:
+      - "8983:8983"
+    volumes:
+      - ./solr_data:/var/solr
+    environment:
+      - SOLR_HOME=/var/solr
+    command: solr start -c -f
