@@ -1,10 +1,8 @@
 services:
   oracle:
-    image: gvenzl/oracle-xe:latest
+    image: gvenzl/oracle-xe:18
     environment:
       ORACLE_PASSWORD: oracle
-      APP_USER: oracle
-      APP_USER_PASSWORD: oracle
     ports:
       - 11521:1521
     volumes:
